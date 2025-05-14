@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class LevelManager : MonoBehaviour
     // [SerializeField] private GameObject GameOver_canvas;
     public GameCanvas gameCanvas;
     public static LevelManager instance;
+    private int gemsCount = 0;
+    private int lifesCount = 0;
+    [SerializeField] private TextMeshProUGUI gemsCountText;
+    [SerializeField] private TextMeshProUGUI lifesCountText;
 
     private void Awake()
     {
@@ -37,6 +42,8 @@ public class LevelManager : MonoBehaviour
         // GameOver_canvas.SetActive(true);
         gameCanvas.ShowGameVictory(true);
         Time.timeScale = 0.0f;
+        // gemsCountText.text = gemsCount.ToString();
+        // lifesCountText.text = lifesCount.ToString();
     }
 
     // Update is called once per frame
@@ -55,5 +62,13 @@ public class LevelManager : MonoBehaviour
         gameCanvas.ShowGameVictory(false);
         gameCanvas.ShowGameMenu(true);
         SceneManager.LoadScene("menu");
+    }
+
+    public void UpdateStats(int gems, int lifes)
+    {
+        gemsCount = gems;
+        lifesCount = lifes;
+        gemsCountText.text = gemsCount.ToString();
+        lifesCountText.text = lifesCount.ToString();
     }
 }

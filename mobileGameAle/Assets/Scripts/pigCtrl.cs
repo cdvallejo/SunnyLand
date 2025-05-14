@@ -9,6 +9,7 @@ public class pigCtrl : MonoBehaviour
     private int currentWaypointIndex = 0;
     private bool dead = false;
     private SpriteRenderer spriteRenderer;
+    public AudioSource audioJumpHit; 
     /*[SerializeField]*/ public bool isMoveLeft = false;
 
     public Animator animator;
@@ -47,10 +48,15 @@ public class pigCtrl : MonoBehaviour
 
 
     public void Death() {
+        audioJumpHit.Play();
+        dead = true;
         //Destroy(gameObject);
         animator.SetTrigger("Death");
         //speed = 0;
-        dead = true;
         Destroy(gameObject, timeToDeath); // Destruye el objeto después de 1 segundo
+    }
+
+    public bool IsDead() {
+        return dead;
     }
 }
